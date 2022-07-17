@@ -1,0 +1,188 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Consultation{% endblock %}
+
+{% block body %}
+    <h1>Consultation</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ consultation.id }}</td>
+            </tr>
+            <tr>
+                <th>Type</th>
+                <td>{{ consultation.type }}</td>
+            </tr>
+            <tr>
+                <th>Observation</th>
+                <td>{{ consultation.observation }}</td>
+            </tr>
+            <tr>
+            <th>Malade</th>
+                <td>{{ consultation.sick.lastName }} {{ consultation.sick.firstName }}</td>
+            </tr>
+            <tr>
+            <th>Medecin</th>
+                <td>{{ consultation.user.email }}</td>
+            </tr>
+            <tr>
+              <th>Facteurs généraux</th>
+                <td>
+                  {% for facteur in consultation.facteursGenerauxInitialeParo %}
+                   {{ facteur }},
+                  {% endfor %}
+                </td>
+            </tr>
+            <tr>
+              <th>Douleurs gingivales</th>
+              <td>
+                {% if consultation.douleurGingivaleInitialeParo %}
+                OUI
+                {% else %}
+                NON
+                {% endif %}
+              </td>
+            </tr>
+            <tr>
+              <th>Hypersensibilité dentinaire</th>
+              <td>
+                {% if consultation.hyperSensibiliteDentinaireInitialeParo %}
+                OUI
+                {% else %}
+                NON
+                {% endif %}
+              </td>
+            </tr>
+            <tr>
+              <th>Prescription désensibilisant dentinaire</th>
+              <td>
+                {% if consultation.prescriptionDesensibilisantInitialeParo %}
+                OUI
+                {% else %}
+                NON
+                {% endif %}
+              </td>
+            </tr>
+            <tr>
+              <th>Mauvaise haleine subjective</th>
+              <td>
+                {% if consultation.mauvaiseHaleineSubjectiveInitialeParo %}
+                OUI
+                {% else %}
+                NON
+                {% endif %}
+              </td>
+            </tr>
+            <tr>
+              <th>Mobilités dentaires subjectives</th>
+              <td>
+                {% if consultation.mobiliteDentaireSubjectiveInitialeParo %}
+                OUI
+                {% else %}
+                NON
+                {% endif %}
+              </td>
+            </tr>
+            <tr>
+              <th>Migrations dentaires subjectives</th>
+              <td>
+                {% if consultation.migrationDentaireSubjectiveInitialeParo %}
+                OUI
+                {% else %}
+                NON
+                {% endif %}
+              </td>
+            </tr>
+            <tr>
+              <th>Indice de saignement subjectif</th>
+              <td>
+                {% set value = consultation.indiceSaignementInitialeParo %}
+                {% if value == '4' %}
+                Très élevé 4/4
+                {% elseif value == '3' %}
+                Elevé 3/4
+                {% elseif value == '2' %}
+                Moyen 2/4
+                {% elseif value == '1' %}
+                Faible 1/4
+                {% elseif value == '0' %}
+                Nul
+                {% endif %}
+              </td>
+            </tr>
+            <tr>
+              <th>Consommation de tabac</th>
+              <td>
+                {{ consultation.tabacInitialeParo }}
+              </td>
+            </tr>
+            <tr>
+              <th>Dents à extraire</th>
+              <td>
+              {% for dent1 in consultation.secteur1MobiliteCliniqueInitialeParo %}
+                {{ dent1 }}
+              {% endfor %}
+              {% for dent2 in consultation.secteur2MobiliteCliniqueInitialeParo %}
+                {{ dent2 }}
+              {% endfor %}
+              {% for dent3 in consultation.secteur3MobiliteCliniqueInitialeParo %}
+                {{ dent3 }}
+              {% endfor %}
+              {% for dent4 in consultation.secteur4MobiliteCliniqueInitialeParo %}
+                {{ dent4 }}
+              {% endfor %}
+            </td>
+            </tr>
+            {% set nbSitesSondes = consultation.nombreSiteSondesInitialeParo %}
+            {% set nbPointsSaignement = consultation.nombrePointSaignementInitialeParo %}
+            {% set indice = nbPointsSaignement/nbSitesSondes * 100 %}
+            <tr>
+              <th>Indice de saignement</th>
+              <td>{{ indice }} %</td>
+            </tr>
+            {% set poches3mm = consultation.nombrePoche3mmInitialeParo %}
+            {% set poches5mm = consultation.nombrePoche5mmInitialeParo %}
+            {% set dentsPerdues = consultation.dentsPerduesParMPInitialeParo %}
+            {% set dentsConservables = consultation.dentsMajoritairementConservablesInitialeParo %}
+
+            {% if (poches5mm == 0) and (false == dentsPerdues) %}
+              {% set intensite = '1' %}
+            {% endif %}
+            {% if (poches5mm > 0) and (false == dentsPerdues) %}
+              {% set intensite = '2' %}
+            {% endif %}
+            {% if  (dentsPerdues == true) and (dentsConservables == true) %}
+              {% set intensite = '3' %}
+            {% endif %}
+            {% if  (dentsPerdues == true) and (dentsConservables == false) %}
+              {% set intensite = '4' %}
+            {% endif %}
+            <tr>
+              <th>Intensité</th>
+              <td>{{ intensite }}</td>
+            </tr>
+            {% set nbFacteur = consultation.facteursGenerauxInitialeParo|length %}
+            {% if consultation.evolutionInitialeParo == true %}
+              {% set evolution = 'A' %}
+            {% endif %}
+            {% if consultation.evolutionInitialeParo == false %}
+              {% set evolution = 'B' %}
+            {% endif %}
+            {% if (consultation.evolutionInitialeParo == false) and (nbFacteur > 0)  %}
+              {% set evolution = 'C' %}
+            {% endif %}
+            <tr>
+              <th>Evolution</th>
+              <td> {{ evolution }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_consultation_index') }}">back to list</a>
+
+    <a href="{{ path('app_consultation_edit', {'id': consultation.id}) }}">edit</a>
+
+    {{ include('consultation/_delete_form.html.twig') }}
+{% endblock %}

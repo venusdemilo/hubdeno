@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Sick{% endblock %}
+
+{% block body %}
+    <h1>Sick</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ sick.id }}</td>
+            </tr>
+            <tr>
+                <th>IPP</th>
+                <td>{{ sick.iPP }}</td>
+            </tr>
+            <tr>
+                <th>FirstName</th>
+                <td>{{ sick.firstName }}</td>
+            </tr>
+            <tr>
+                <th>LastName</th>
+                <td>{{ sick.lastName }}</td>
+            </tr>
+            <tr>
+                <th>Medecin référent</th>
+                <td>
+                  {% for user in sick.users %}
+                    Dr {{user.email}}
+                  {% else %}
+                    <li><em>aucun medecin référent</em></li>
+                  {% endfor %}
+
+                </td>
+            </tr>
+            <tr>
+                <th>Consultations</th>
+                <td>
+                  {% for consultation in sick.consultations %}
+                  <li>{{consultation.type}} - Dr {{consultation.user.email}} - {{consultation.createdAt|date('d-m-Y')}}</li>
+
+                  {% else %}
+                    <li><em>pas de consultation associée</em></li>
+                  {% endfor %}
+                </td>
+
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_sick_index') }}">back to list</a>
+
+    <a href="{{ path('app_sick_edit', {'id': sick.id}) }}">edit</a>
+    <a href="{{ path('consultation_choice', {'sickId': sick.id}) }}">ajouter une consultation</a>
+
+    {{ include('sick/_delete_form.html.twig') }}
+{% endblock %}

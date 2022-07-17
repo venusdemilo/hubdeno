@@ -1,0 +1,99 @@
+{{ form_start(form) }}
+  {{ form_row(form.type) }}
+  {% if form.tumeurPrimitiveHubdenoInitiale is defined %}
+
+  <h3>Informations oncologue</h3>
+    {{form_row(form.etiologieTraitementHubdenoInitiale)}}
+    {{form_row(form.debutTraitementHubdenoInitiale)}}
+    {{form_row(form.dateDebutTraitementHubdenoInitiale)}}
+    {{form_row(form.finTraitementHubdenoInitiale)}}
+    {{form_row(form.dateFinTraitementHubdenoInitiale)}}
+    {{form_row(form.tumeurPrimitiveHubdenoInitiale)}}
+    {{form_row(form.localisationMetastaseHubdenoInitiale)}}
+    {{form_row(form.therapeutiqueMedicamenteuseHubdenoInitiale)}}
+    {{form_row(form.therapeutiqueChirurgicaleHubdenoInitiale)}}
+    {{form_row(form.typeDeChirurgieHubdenoInitiale)}}
+    {{form_row(form.radioTherapieHubdenoInitiale)}}
+    {{form_row(form.localisationRadioTherapieHubdenoInitiale)}}
+    {{form_row(form.etatGeneralHubdenoInitiale)}}
+    {{form_row(form.pronosticHubdenoInitiale)}}
+  <h3>Comorbidité et traitements associés</h3>
+    {{form_row(form.maladieChroniqueHubdenoInitiale)}}
+    {{form_row(form.typeMaladieChroniqueHubdenoInitiale)}}
+    {{form_row(form.risqueInfectieuxHubdenoInitiale)}}
+    {{form_row(form.typeRisqueInfectieuxHubdenoInitiale)}}
+    {{form_row(form.antiAngiogeniqueAssocieHubdenoInitiale)}}
+    {{form_row(form.iroAssocieHubdenoInitiale)}}
+    {{form_row(form.typeIroAssocieHubdenoInitiale)}}
+  <h3>Anamnèse bucco-dentaire</h3>
+    {{form_row(form.existanceChirurgienDentisteTraitantHubdenoInitiale)}}
+    {{form_row(form.nomChirurgienDentisteTraitantHubdenoInitiale)}}
+    {{form_row(form.regulariteSuiviDentaireHubdenoInitiale)}}
+  <h3>Examen bucco-dentaire</h3>
+    {{form_row(form.prothAmovibleHubdenoInitiale)}}
+    {{form_row(form.anodontieHubdenoInitiale)}}
+    <h4>Evaluation d'une ONM au stade 0</h4>
+    {{form_row(form.stade0SymptomesNonSpecifiquesHubdenoInitiale)}}
+    {{form_row(form.stade0SignesCliniquesNonSpecifiquesHubdenoInitiale)}}
+    {{form_row(form.stade0ElementsRadiologiquesHubdenoInitiale)}}
+    {{form_row(form.stade0OnmHubdenoInitiale)}}
+    {{form_row(form.stade0LocalisationSextantOnmHubdenoInitiale)}}
+    <h4>ONM avérée</h4>
+    <b>Définition ONM :</b>
+    <i>Exposition d’os dans la région maxillofaciale ne cicatrisant pas depuis plus de 8 semaines chez un patient n’ayant <b>pas d’antécédents</b> de radiothérapie cervico-faciale <b>avec absence</b> de localisation métastatique au niveau de la zone d’ONM</i>
+    {{form_row(form.onmHubdenoInitiale)}}
+    {{form_row(form.localisationSextantOnmHubdenoInitiale)}}
+    {{form_row(form.stadeOnmHubdenoInitiale)}}
+    {{form_row(form.foyersInfectieuxHubdenoInitiale)}}
+    {{form_row(form.secteur1LocalisationFoyersInfectieuxHubdenoInitiale)}}
+    {{form_row(form.secteur2LocalisationFoyersInfectieuxHubdenoInitiale)}}
+    {{form_row(form.secteur3LocalisationFoyersInfectieuxHubdenoInitiale)}}
+    {{form_row(form.secteur4LocalisationFoyersInfectieuxHubdenoInitiale)}}
+    {{form_row(form.dentsConservablesATraiterHubdenoInitiale)}}
+    {{form_row(form.secteur1LocalisationDentsConservablesATraiterHubdenoInitiale)}}
+    {{form_row(form.secteur2LocalisationDentsConservablesATraiterHubdenoInitiale)}}
+    {{form_row(form.secteur3LocalisationDentsConservablesATraiterHubdenoInitiale)}}
+    {{form_row(form.secteur4LocalisationDentsConservablesATraiterHubdenoInitiale)}}
+  {% endif %}
+
+  {% if form.anamneseInitialeParo is defined %}
+  <h3>Facteurs généraux</h3>
+    {{form_row(form.facteursGenerauxInitialeParo)}}
+
+  <h3>ADAMS</h3>
+    <h4>Anamnèse</h4>
+    {{form_row(form.anamneseInitialeParo)}}
+    <h4>Douleur</h4>
+    {{form_row(form.douleurGingivaleInitialeParo)}}
+    {{form_row(form.hyperSensibiliteDentinaireInitialeParo)}}
+    {{form_row(form.prescriptionDesensibilisantInitialeParo)}}
+    <h4>hAleine</h4>
+    {{form_row(form.mauvaiseHaleineSubjectiveInitialeParo)}}
+    <h4>Mobilités & migrations</h4>
+    {{form_row(form.mobiliteDentaireSubjectiveInitialeParo)}}
+    {{form_row(form.migrationDentaireSubjectiveInitialeParo)}}
+    <h4>Saignement</h4>
+    {{form_row(form.indiceSaignementInitialeParo)}}
+    {{form_row(form.tabacInitialeParo)}}
+  <h3>Examen clinique</h3>
+    <h4>Mobilités supérieures à 4</h4>
+
+    {{form_row(form.secteur1MobiliteCliniqueInitialeParo)}}
+    {{form_row(form.secteur2MobiliteCliniqueInitialeParo)}}
+    {{form_row(form.secteur3MobiliteCliniqueInitialeParo)}}
+    {{form_row(form.secteur4MobiliteCliniqueInitialeParo)}}
+    <h4>Sondages</h4>
+    <h5>Saignement</h5>
+    {{form_row(form.nombreSiteSondesInitialeParo)}}
+    {{form_row(form.nombrePointSaignementInitialeParo)}}
+    <h5>Poches</h5>
+    {{form_row(form.nombrePoche3mmInitialeParo)}}
+    {{form_row(form.nombrePoche5mmInitialeParo)}}
+    <h4>Intensité</h4>
+    {{form_row(form.dentsPerduesParMPInitialeParo)}}
+    {{form_row(form.dentsMajoritairementConservablesInitialeParo)}}
+    <h4>Evolution</h4>
+    {{form_row(form.evolutionInitialeParo)}}
+  {% endif %}
+  {{form_row(form.observation)}}
+{{ form_end(form) }}
