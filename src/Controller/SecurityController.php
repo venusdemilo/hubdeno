@@ -11,7 +11,7 @@ use Psr\Log\LoggerInterface;
 class SecurityController extends AbstractController
 {
     #[Route(path: '/login', name: 'app_login')]
-    public function login(AuthenticationUtils $authenticationUtils): Response
+    public function login(AuthenticationUtils $authenticationUtils, LoggerInterface $logger): Response
     {
         // if ($this->getUser()) {
         //     return $this->redirectToRoute('target_path');
@@ -19,7 +19,7 @@ class SecurityController extends AbstractController
 
         // get the login error if there is one
         $logger->info('I just got the logger');
-    $logger->error('An error occurred');
+        $logger->error('An error occurred');
         $error = $authenticationUtils->getLastAuthenticationError();
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
