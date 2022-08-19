@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Psr\Log\LoggerInterface;
 
 class SecurityController extends AbstractController
 {
@@ -17,6 +18,8 @@ class SecurityController extends AbstractController
         // }
 
         // get the login error if there is one
+        $logger->info('I just got the logger');
+    $logger->error('An error occurred');
         $error = $authenticationUtils->getLastAuthenticationError();
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
